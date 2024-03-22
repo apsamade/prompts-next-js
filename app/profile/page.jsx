@@ -9,7 +9,7 @@ import Profile from "@components/Profile"
 
 const MyProfile = () => {
     const router = useRouter()
-    const {data: session} = useSession()
+    const { data: session } = useSession()
     const [posts, setPosts] = useState([])
 
     useEffect(()=> {
@@ -18,7 +18,6 @@ const MyProfile = () => {
             const data = await response.json()
 
             setPosts(data)
-
         }
         
         if(session?.user.id) fetchPosts();

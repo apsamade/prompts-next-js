@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react"
-import { useRouter } from "next/router"
-import { useSearchParams, useSearchParam } from "react-use"
-import { Suspense } from 'react'
+'use client'
+
+import { useEffect, useState, Suspense } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 
 import Form from "@components/Form"
 
 const EditPrompt = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const promptId = useSearchParam('id')
+    const promptId = searchParams.get('id')
 
     const [submitting, setSubmitting] = useState(false);
     const [post, setPost] = useState({ prompt: '', tag: '' })
@@ -51,7 +51,7 @@ const EditPrompt = () => {
         }
     }
     return (
-        <Suspense fallback={<p>En attente du chargement du contenu ...</p>}>
+        <Suspense fallback={<p>En attente du chargement du contenue ...</p>}>
             <Form
                 type='Edit'
                 post={post}

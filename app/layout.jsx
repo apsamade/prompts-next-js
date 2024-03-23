@@ -1,5 +1,7 @@
 import '@styles/global.css';
 
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/react"
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
 
@@ -20,6 +22,8 @@ const RootLayout = ({ children }) => {
           <main className='app'>
             <Nav />
             {children}
+            <Analytics />
+            <SpeedInsights />
           </main>
         </Provider>
       </body>

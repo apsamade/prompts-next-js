@@ -50,7 +50,7 @@ const Feed = () => {
                     className="search_input peer"
                 />
             </form>
-
+        
             <PromptCardList 
                 data={post}
                 handleTagClick={() => {}}

@@ -10,15 +10,10 @@ export const connectToDB = async () => {
         return;
     }
 
-    try {
-        await mongoose.connect(process.env.MONGODB_URI, {
-            dbName: "prompt_bouderga",
-        })
-
-        isConnected = true;
-
+    mongoose.connect(process.env.MONGODB_URI).then(()=> {
+        isConnected = true;        
         console.log('MongoDB connected')
-    } catch (error) {
-        console.log(error);
-    }
+    }).catch((err)=> {
+        console.log(err)
+    })
 }

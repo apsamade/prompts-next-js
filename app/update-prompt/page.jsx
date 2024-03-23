@@ -5,7 +5,7 @@ import { useRouter, useSearchParams } from "next/navigation"
 
 import Form from "@components/Form"
 
-const EditPrompt = () => {
+const Edit = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const promptId = searchParams.get('id')
@@ -23,14 +23,14 @@ const EditPrompt = () => {
                 tag: data.tag
             })
         }
-        if(promptId) getPromptDetails();
+        if (promptId) getPromptDetails();
     }, [promptId])
 
     const updatePrompt = async (e) => {
         e.preventDefault();
         setSubmitting(true);
 
-        if(!promptId) return alert('Prompt ID non trouvé')
+        if (!promptId) return alert('Prompt ID non trouvé')
 
         try {
             const response = await fetch(`/api/prompt/${promptId}`, {
@@ -51,16 +51,20 @@ const EditPrompt = () => {
         }
     }
     return (
+        <Form
+            type='Edit'
+            post={post}
+            setPost={setPost}
+            submitting={submitting}
+            handleSubmit={updatePrompt}
+        />
+    )
+}
+const EditPrompt = () => {
+    return (
         <Suspense fallback={<p>En attente du chargement du contenue ...</p>}>
-            <Form
-                type='Edit'
-                post={post}
-                setPost={setPost}
-                submitting={submitting}
-                handleSubmit={updatePrompt}
-            />
+            <Edit />
         </Suspense>
     )
 }
-
 export default EditPrompt

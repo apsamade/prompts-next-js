@@ -4,6 +4,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Analytics } from "@vercel/analytics/react"
 import Nav from '@components/Nav'
 import Provider from '@components/Provider'
+import { Suspense } from 'react';
+import { space } from 'postcss/lib/list';
 
 export const metadata = {
   title: "Prompt Bouderga",
@@ -20,7 +22,10 @@ const RootLayout = ({ children }) => {
           </div>
 
           <main className='app'>
-            <Nav />
+            <Suspense fallback={<span>Loading ...</span>}>
+              <Nav />
+            </Suspense>
+
             {children}
             <Analytics />
             <SpeedInsights />

@@ -8,14 +8,16 @@ import Form from "@components/Form"
 const Edit = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
-    const promptId = searchParams.get('id')
+    const promptId = searchParams.get('name')
 
     const [submitting, setSubmitting] = useState(false);
     const [post, setPost] = useState({ prompt: '', tag: '' })
 
     useEffect(() => {
         const getPromptDetails = async () => {
-            const response = await fetch(`/api/prompt/${promptId}`)
+            const response = await fetch(`/api/prompt/${promptId}`, {
+                next: { revalidate: 10 }, // Seconds
+            })
             const data = await response.json()
 
             setPost({

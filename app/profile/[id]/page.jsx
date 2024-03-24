@@ -1,25 +1,22 @@
 'use client'
 
 import { useState, useEffect, Suspense } from "react"
-import { useSearchParams } from "next/navigation"
 
 import Profile from "@components/Profile"
 
-const GET = () => {
+const GET = ( {params} ) => {
     const [profileId, setProfileId] = useState([])
-    const searchParams = useSearchParams();
-    const promptId = searchParams.get('id')
 
     useEffect(()=>{
         const fetchProfile = async () =>{
-            const response = await fetch(`/api/users/${promptId}/posts`)
+            const response = await fetch(`/api/users/${params.id}/posts`)
             const data = await response.json()
 
             setProfileId(data)
         }
-        if(promptId) fetchProfile()
-    }, [promptId])
-    console.log(profileId.find(p => p.creator.username))
+        if(params.id) fetchProfile()
+    }, [params.id])
+    console.log('params : ', params.id)
 
 
     return (
@@ -34,10 +31,13 @@ const GET = () => {
         </section>
     )
 }
-const profileId = () => {
+const profileId = ({params}) => {
+    console.log('this params : ', params)
     return(
         <Suspense fallback={<p>Loading ...</p>}>
-            <GET />
+            <GET 
+                params={params}
+            />
         </Suspense>
     )
 }

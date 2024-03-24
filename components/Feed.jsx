@@ -30,8 +30,7 @@ const Feed = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             const response = await fetch('/api/prompt', {
-                next: { revalidate: 10 }, // Seconds
-                cache: 'no-store'
+                next: { revalidate: 2 }, // Seconds
             })
             const data = await response.json()
 
